@@ -16,6 +16,7 @@ void draw()
 
 void parabolicPupils()
 {
+  int numberOfLines=51;
 	strokeWeight(2);
 	ellipse(120, 120, 180, 180);
 	ellipse(360, 120, 180, 180);
@@ -30,13 +31,13 @@ void parabolicPupils()
  //and adding next line: line(cos(radians(90.0-11.25))*100, -sin(radians(90.0-11.25))*100, cos(radians(210-11.25))*100, -sin(radians(210-11.25))*100);
  //-------------------------------------------------------------//
  
- //This is the result of my parabolic circle in a loop calculating the unit circle(enhetscirkeln) 
- //the line do 32 steps in a 360degree circle. 360/32=11.25. Adding x2 steps in 360 and angle to 11.(4)25
+ //creating parabolic circle in a loop calculating the unit circle(enhetscirkeln) 
+ //the line do 51 steps in a 360degrees circle. 360/51=7,058823529411765 (degrees)
 
  //left eyeball
  float angleL=0.0;
  translate(120, 120);
- for(int i=0;i<64;i++)
+ for(int i=0;i<numberOfLines;i++)
  {
     if (i % 3==0)
     {
@@ -47,13 +48,13 @@ void parabolicPupils()
       stroke(0,0,0,64);
     }
   line(cos(radians(angleL))*90, -sin(radians(angleL))*90, cos(radians(angleL+120))*90, -sin(radians(angleL+120))*90); 
-  angleL += 11.425;
+  angleL += 360/numberOfLines;
  }
 
  //right eyeball
  float angleR=0.0;
  translate(240, 0);
- for(int i=0;i<64;i++)
+ for(int i=0;i<numberOfLines;i++)
  {
     if (i % 3==0)
     {
@@ -64,7 +65,7 @@ void parabolicPupils()
       stroke(0,0,0,64);
     }
   line(cos(radians(angleR))*90, -sin(radians(angleR))*90, cos(radians(angleR+120))*90, -sin(radians(angleR+120))*90); 
-  angleR += 11.425;
+  angleR += 360/numberOfLines;
  }
 }
 
