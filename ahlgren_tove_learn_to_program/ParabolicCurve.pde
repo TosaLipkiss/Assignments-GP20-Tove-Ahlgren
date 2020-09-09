@@ -1,3 +1,6 @@
+int greyColor=150;
+int blackColor=0;
+
 void setup()
 {
   size(480, 240);
@@ -17,11 +20,12 @@ void draw()
 void parabolicPupils()
 {
   int numberOfLines=51;
-	strokeWeight(2);
-	ellipse(120, 120, 180, 180);
-	ellipse(360, 120, 180, 180);
-	strokeWeight(1);
-	fill(250,250,250);
+  fill(255,255,255);
+  stroke(blackColor,blackColor,blackColor);
+  strokeWeight(2);
+  ellipse(120, 120, 180, 180);
+  ellipse(360, 120, 180, 180);
+  strokeWeight(1);
 
   resetMatrix();
 
@@ -41,11 +45,11 @@ void parabolicPupils()
  {
     if (i % 3==0)
     {
-      stroke(0,0,0,200);
+      stroke(blackColor,blackColor,blackColor);
     }
     else
     {
-      stroke(0,0,0,64);
+      stroke(greyColor,greyColor,greyColor);
     }
   line(cos(radians(angleL))*90, -sin(radians(angleL))*90, cos(radians(angleL+120))*90, -sin(radians(angleL+120))*90); 
   angleL += 360/numberOfLines;
@@ -58,11 +62,11 @@ void parabolicPupils()
  {
     if (i % 3==0)
     {
-      stroke(0,0,0,200);
+      stroke(blackColor,blackColor,blackColor);
     }
     else
     {
-      stroke(0,0,0,64);
+      stroke(greyColor,greyColor,greyColor);
     }
   line(cos(radians(angleR))*90, -sin(radians(angleR))*90, cos(radians(angleR+120))*90, -sin(radians(angleR+120))*90); 
   angleR += 360/numberOfLines;
@@ -77,35 +81,11 @@ void eyeShapes()
   {
     if (shift % 3==0)
     {
-      stroke(0,0,0,200);
+      stroke(blackColor,blackColor,blackColor);
     }
     else
     {
-      stroke(0,0,0,64);
-    }
-    //creating line as parabolic for left eyelids
-    line(shift,0,240,shift);
-    line(0,shift,shift,240);
-    //creating line as parabolic for right eyelids
-    line(240+shift,240,480,240-shift);
-    line(240,240-shift,240+shift,0);
-    shift += 10;
-  }
-}
-
-
-void peak()
-{
-  int shift=0;
-  while (shift <= 240)
-  {
-    if (shift % 3==0)
-    {
-      stroke(0,0,0,200);
-    }
-    else
-    {
-      stroke(0,0,0,64);
+      stroke(greyColor,greyColor,greyColor);
     }
     //creating line as parabolic for left eyelids
     line(shift,0,240,shift);
