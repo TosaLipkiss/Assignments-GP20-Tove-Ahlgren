@@ -5,10 +5,10 @@ PVector vectorInput = new PVector();
 PVector position = new PVector();
 PVector acceleration = new PVector();
 PVector velocity = new PVector();
-float friction=2.0f;
+float friction=4.0f;
 
-float speed=1.0f;
-float maxSpeed=2.00f;
+float speed=60.0f;
+float maxSpeed=6.00f;
 
 float time=0;
 float deltaTime=0;
@@ -28,41 +28,37 @@ void setup()
 	position.x = width / 2;
 }
 
-
 void draw() 
 {
 	background(0, 0, 0);
 
 	float currentTime = millis();
 	deltaTime = (currentTime - time) * 0.001f;
-	//println(currentTime-time);
 
-	rocket();
 	acceleration = input();
 
-	println(acceleration.mag());
-
-	if(acceleration.mag()<=0)
+	if(acceleration.mag()==0)
 	{
-		acceleration.x -= velocity.x * friction;
-		acceleration.y -= velocity.y * friction;
+		acceleration.x -= velocity.x * friction * deltaTime;
+		acceleration.y -= velocity.y * friction * deltaTime;
 	}
 
-	//normalize diagonally speed
-	acceleration.normalize();
-
 	//add acceleration to velocity
-	acceleration.mult(deltaTime);
 	velocity.add(acceleration);
 
 	//Update velocity
-	velocity.mult(speed);
 	velocity.limit(maxSpeed);
-	position.add(velocity);
+	PVector move = velocity.copy();
+	move.mult(speed*deltaTime);
+	position.add(move);
+
+	yWallCollision();
+	crossSides();
+	fire();
+	rocket();
 
 	time = currentTime;
 }
-
 
 ///////////////METHODS//////////////
 
@@ -80,16 +76,34 @@ void rocket()
 	ellipse(position.x, position.y+-3, 20, 29);
 	//pipe
 	fill(155, 155, 155);
-	rect(position.x-5, position.y-(-10), 9, 4);
+	rect(position.x-5, position.y-(-10), 10, 4);
 	//window
 	fill(155, 155, 155);
-	ellipse(position.x, position.y+-5, 10, 10);
+	ellipse(position.x, position.y+-6, 10, 10);
 	//tip
 	fill(255, 0, 0);
 	triangle(position.x+7, position.y-14, position.x+0, position.y-20, position.x-7, position.y-14);
 }
 
+void fire()
+{
+	boolean animateFire=true;
 
+	if(frameCount % 10==0)
+	{
+		if (animateFire)
+		{
+			fill(250,40,0);
+			ellipse(position.x, position.y+23, 10, 20);
+			fill(225,225,0);
+			ellipse(position.x, position.y+18, 6, 14);
+		}
+		else 
+		{
+			animateFire = !animateFire;
+		}
+	}
+}
 
 
 //Key functions methods
@@ -134,40 +148,53 @@ void keyReleased()
 
 PVector input()
 {
+	int inputCorrection=1;
 	vectorInput.x=0;
 	vectorInput.y=0;
 
 	if(moveLeft)
 	{
-		vectorInput.x -= 1;
+		vectorInput.x -= inputCorrection;
 	}
 	if (moveRight)
 	{
-		vectorInput.x += 1;
+		vectorInput.x += inputCorrection;
 	}
 	if(moveDown)
 	{
-		vectorInput.y += 1;
+		vectorInput.y += inputCorrection;
 	}
 	if(moveUp)
 	{
-		vectorInput.y -= 1;
+		vectorInput.y -= inputCorrection;
 	}
 
+	//normalize diagonally speed
 	vectorInput.normalize();
 
 	return vectorInput;
 }
 
-
 void crossSides()
 {
-	if(position.x == 399)
+	if(position.x > width)
 	{
-		position.x -= 300;
+		position.x = 0;
 	}
-	if(position.x == 0)
+	if(position.x < 0)
 	{
-		position.x += 399;
+		position.x = width;
+	}
+}
+
+void yWallCollision()
+{
+	if (position.y >= height-20)
+	{
+		position.y = height-20;
+	}
+	if (position.y <= 20)
+	{
+		position.y = 20;
 	}
 }
