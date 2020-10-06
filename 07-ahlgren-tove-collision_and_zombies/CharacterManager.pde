@@ -6,13 +6,14 @@ class CharacterManager
 
 	public CharacterManager()
 	{
-		human = new Human[99];
-	 	zombie  = new Zombie[100];
+		human = new Human[98];
+	 	zombie  = new Zombie[99];
 
 		for(int i = 0 ; i < human.length ; i++)
 		{
 			human[i] = new Human();
 		}
+
 		zombie[0] = new Zombie();
 	}
 
@@ -25,6 +26,7 @@ class CharacterManager
 				human[i].update();
 			}
 		}
+
 		for(int i = 0 ; i < zombie.length ; i++)
 		{
 			if(zombie[i] != null)
@@ -65,6 +67,7 @@ class CharacterManager
 				}
 			}
 		}
+
 		boolean hasNull = false;
 
 		for(int i = 0 ; i < zombie.length ; i++)
@@ -90,6 +93,7 @@ class CharacterManager
 				human[i].draw();			
 			}
 		}
+		
 		for (int i = 0 ; i < zombie.length ; i++)
 		{
 			if(zombie[i] != null)
