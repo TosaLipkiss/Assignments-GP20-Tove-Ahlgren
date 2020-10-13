@@ -1,1 +1,1 @@
-![]("GameOfLife_Gif")
+![](GameOfLife_Gif.gif)
