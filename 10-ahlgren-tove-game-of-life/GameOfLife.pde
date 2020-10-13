@@ -6,7 +6,7 @@ Cell[][] cells;
 
 void setup() 
 {
-	size(400, 400);
+	size(1000, 1000);
 	ellipseMode(LEFT);
 	frameRate(4);
 
