@@ -4,8 +4,12 @@ int numberOfPoints = 100;
 int posX = 0;
 int vel = 2;
 int distance;
-
 int resizer = 5;
+
+double i = 0;
+float r = 0;
+int flag = 0;
+int num = 1;
 
 float time;
 float deltaTime=0;
@@ -26,6 +30,7 @@ void setup()
 
 void draw()
 {
+  float offset = millis() / 1000f;
   float currentTime = millis();
   deltaTime = (currentTime - time) * 0.001f;
   timeCounter += deltaTime;
@@ -65,12 +70,13 @@ void draw()
 
   stroke(59,197,255);
 
+  //circle
   for(int i=0; i <= n * 4; i++)
   {
     stroke(random(255),random(255),random(255));
-    float stepSize = PI * 2 / n;
+    float stepSize = TWO_PI / n;
     //45 * 0, 45 * 1, 45 * 2....
-    point(x + cos(stepSize * i) * spiralRadius,y - sin(stepSize * i) * spiralRadius);
+    point(x + cos(stepSize * i - offset) * spiralRadius,y - sin(stepSize * i - offset) * spiralRadius);
     spiralRadius += 0.7 + i * 0.01f;
   }
     time = currentTime;
