@@ -30,7 +30,7 @@ void setup()
 
 void draw()
 {
-  float offset = millis() / 1000f;
+  float offset = millis() / 300f;
   float currentTime = millis();
   deltaTime = (currentTime - time) * 0.001f;
   timeCounter += deltaTime;
@@ -77,7 +77,7 @@ void draw()
     float stepSize = TWO_PI / n;
     //45 * 0, 45 * 1, 45 * 2....
     point(x + cos(stepSize * i - offset) * spiralRadius,y - sin(stepSize * i - offset) * spiralRadius);
-    spiralRadius += 0.7 + i * 0.01f;
+    spiralRadius += 0.3 + i * 0.01f;
   }
     time = currentTime;
 }
